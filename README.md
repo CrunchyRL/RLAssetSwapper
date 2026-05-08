@@ -2,8 +2,8 @@
 
 A pair of Python scripts for inspecting and swapping Rocket League cosmetic assets (`.upk` packages).
 
-- **`rl_upk_editor.py`** — Low-level UPK inspector and editor (GUI)
-- **`rl_asset_swapper.py`** — High-level cosmetic asset swapper (GUI + CLI)
+- **`rl_upk_editor.py`** - Low-level UPK inspector and editor (GUI)
+- **`rl_asset_swapper.py`** - High-level cosmetic asset swapper (GUI + CLI)
 
 ---
 
@@ -18,7 +18,7 @@ pip install cryptography
 
 Both scripts use Python's built-in `tkinter` for their GUIs. On Windows this is included by default. On Linux you may need to install it separately (e.g. `sudo apt install python3-tk`).
 
-The two scripts must be placed **in the same folder** — the asset swapper imports the UPK editor at runtime and will fail to start if it can't find it.
+The two scripts must be placed **in the same folder** - the asset swapper imports the UPK editor at runtime and will fail to start if it can't find it.
 
 ---
 
@@ -33,7 +33,7 @@ Both files should be placed in the same directory as the scripts. The tools will
 
 ---
 
-## ⚠️ Warning — Some Swaps Will Crash the Game
+## ⚠️ Warning - Some Swaps Will Crash the Game
 
 > **Swapping certain asset types is not yet fully supported and will cause Rocket League to crash on load.** This is a known limitation of the current version and is being worked on. Until a fix is released, avoid swapping the following:
 
@@ -41,7 +41,7 @@ Both files should be placed in the same directory as the scripts. The tools will
 
 ---
 
-## `rl_asset_swapper.py` — Asset Swapper
+## `rl_asset_swapper.py` - Asset Swapper
 
 Takes a "donor" item's `.upk` file and repackages it so the game loads it in place of a "target" item. Both the main package and the thumbnail (`_T_SF.upk`) are handled automatically.
 
@@ -53,7 +53,7 @@ python rl_asset_swapper.py
 
 The window has four main sections:
 
-**Top bar — file paths**
+**Top bar - file paths**
 
 | Field | What to set |
 |---|---|
@@ -61,19 +61,19 @@ The window has four main sections:
 | `keys.txt` | Path to your decryption keys (auto-detected if in the same folder) |
 | Donor/input directory | The folder containing your source `.upk` files (e.g. your dumped `CookedPCConsole`) |
 | Output directory | Where the swapped files will be written |
-| Key/revert source dir | The folder containing the original, unmodified `.upk` files — used for correct re-encryption and for reverting swaps. Usually the same as the donor directory |
+| Key/revert source dir | The folder containing the original, unmodified `.upk` files - used for correct re-encryption and for reverting swaps. Usually the same as the donor directory |
 
 **Slot filter & options**
 
 Select a slot (e.g. `Body`, `Wheel`, `Topper`) from the dropdown to filter the item lists. Options:
 
-- **Also swap thumbnails/_T_SF** — also patches the inventory thumbnail package (recommended, on by default)
-- **Preserve header offsets for shorter names** — keeps the package header size stable when a new name is shorter than the old one (recommended, on by default)
-- **Overwrite + .bak** — overwrites existing output files and saves a `.bak` backup first
+- **Also swap thumbnails/_T_SF** - also patches the inventory thumbnail package (recommended, on by default)
+- **Preserve header offsets for shorter names** - keeps the package header size stable when a new name is shorter than the old one (recommended, on by default)
+- **Overwrite + .bak** - overwrites existing output files and saves a `.bak` backup first
 
 **Item lists**
 
-The left list is the **target** — the item whose slot you want to replace visually. The right list is the **donor** — the item whose appearance will be used. Use the search boxes above each list to filter by name, ID, or package name.
+The left list is the **target** - the item whose slot you want to replace visually. The right list is the **donor** - the item whose appearance will be used. Use the search boxes above each list to filter by name, ID, or package name.
 
 The **Preview** panel below the lists shows exactly which name-table entries will be renamed before you commit.
 
@@ -114,8 +114,8 @@ python rl_asset_swapper.py --revert  --donor-dir  /path/to/CookedPCConsole --out
 | `--output-dir` | *(required)* | Output directory |
 | `--key-source-dir` | Same as `--donor-dir` | Directory with originals for re-encryption/revert |
 | `--slot` | *(none)* | Filter items by slot |
-| `--target` | *(required)* | Target item — name, ID, or package stem |
-| `--donor` | *(required unless `--revert`)* | Donor item — name, ID, or package stem |
+| `--target` | *(required)* | Target item - name, ID, or package stem |
+| `--donor` | *(required unless `--revert`)* | Donor item - name, ID, or package stem |
 | `--include-thumbnails` / `--no-thumbnails` | On | Also swap the `_T_SF` thumbnail package |
 | `--preserve-header-offsets` / `--no-preserve-header-offsets` | On | Keep header size stable for shorter names |
 | `--overwrite` / `--no-overwrite` | On | Overwrite existing outputs (saves `.bak`) |
@@ -125,7 +125,7 @@ python rl_asset_swapper.py --revert  --donor-dir  /path/to/CookedPCConsole --out
 
 ---
 
-## `rl_upk_editor.py` — UPK Editor
+## `rl_upk_editor.py` - UPK Editor
 
 A low-level inspector and editor for individual `.upk` files. Useful for examining package internals, making precise edits, and saving re-encrypted packages that the game will accept.
 
@@ -143,30 +143,30 @@ Use **File → Open UPK** to load any `.upk` file. Encrypted Rocket League packa
 
 Once a package is loaded, four tabs are available:
 
-**Summary** — package header metadata: file version, counts and offsets for the name/export/import tables, compression flags, and the package GUID.
+**Summary** - package header metadata: file version, counts and offsets for the name/export/import tables, compression flags, and the package GUID.
 
-**Names** — the full name table. Select any entry to edit it in the field at the bottom of the tab and click **Rename** (or press Enter) to apply. Renaming rebuilds all header offsets automatically.
+**Names** - the full name table. Select any entry to edit it in the field at the bottom of the tab and click **Rename** (or press Enter) to apply. Renaming rebuilds all header offsets automatically.
 
-**Exports** — all exported objects. Selecting an entry shows its properties, raw hex data, and (where applicable) decoded property tags. Additional actions available when an export is selected:
+**Exports** - all exported objects. Selecting an entry shows its properties, raw hex data, and (where applicable) decoded property tags. Additional actions available when an export is selected:
 
-- **Rename Export FName** — change the FName of the selected export
-- **Replace Export From Donor** — overwrite this export's serial data with an export from a different `.upk`
-- **Set DLLBind** — inject or change a DLLBind DLL name on a UClass export (used by mod loaders such as BakkesMod and CodeRed)
+- **Rename Export FName** - change the FName of the selected export
+- **Replace Export From Donor** - overwrite this export's serial data with an export from a different `.upk`
+- **Set DLLBind** - inject or change a DLLBind DLL name on a UClass export (used by mod loaders such as BakkesMod and CodeRed)
 
-**Imports** — all imported object references, shown with their resolved package and class paths.
+**Imports** - all imported object references, shown with their resolved package and class paths.
 
 ### Editing and Saving
 
 All edits are made in memory and must be explicitly saved. Two save options are available under the **File** menu:
 
-- **Save Decrypted UPK** — writes the raw decrypted bytes. Use this for packages that were not originally encrypted, or for external tools that work with plain UPKs.
-- **Save Re-Encrypted UPK** — re-compresses and re-encrypts the package using the original file's key, producing a file the game will load. **Always use this when modifying Rocket League packages for in-game use.**
+- **Save Decrypted UPK** - writes the raw decrypted bytes. Use this for packages that were not originally encrypted, or for external tools that work with plain UPKs.
+- **Save Re-Encrypted UPK** - re-compresses and re-encrypts the package using the original file's key, producing a file the game will load. **Always use this when modifying Rocket League packages for in-game use.**
 
 ### Advanced Operations (Edit menu)
 
-- **Import Donor Names** — append name-table entries from a second `.upk` into the loaded package.
-- **Import Donor Exports as Imports** — re-expose a donor package's exports as import references in the current package, so the engine will load the donor file as a dependency at runtime.
-- **Verify Package** — run a consistency check on all header invariants and display a colour-coded report. Useful for diagnosing crashes caused by invalid offsets after editing.
+- **Import Donor Names** - append name-table entries from a second `.upk` into the loaded package.
+- **Import Donor Exports as Imports** - re-expose a donor package's exports as import references in the current package, so the engine will load the donor file as a dependency at runtime.
+- **Verify Package** - run a consistency check on all header invariants and display a colour-coded report. Useful for diagnosing crashes caused by invalid offsets after editing.
 
 ---
 
