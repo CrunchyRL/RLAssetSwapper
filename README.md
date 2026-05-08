@@ -36,12 +36,8 @@ Both files should be placed in the same directory as the scripts. The tools will
 ## ⚠️ Warning — Some Swaps Will Crash the Game
 
 > **Swapping certain asset types is not yet fully supported and will cause Rocket League to crash on load.** This is a known limitation of the current version and is being worked on. Until a fix is released, avoid swapping the following:
->
-> - **Goal Explosions** — re-encrypted package layout causes a load-time crash
-> - **Trails** — name-table patching for trail assets is not yet stable
-> - **Decals** — cross-item decal swaps may produce an invalid package
->
-> Stick to **Bodies, Wheels, Toppers, Antennas, and Boosts** for reliable results. If a swap you attempt causes a crash, delete the output file from your game directory to revert.
+
+> If a swap you attempt causes a crash, you should either validate game files, OR, you can select a directory with backup files (i play on steam, so i use my epic folder), that will be used when you hit the revert button.
 
 ---
 
