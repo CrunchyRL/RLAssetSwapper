@@ -306,15 +306,18 @@ def apply_name_pairs(upk, package, pairs: Sequence[Tuple[str, str]], preserve_he
         if case_match:
             log.append(f"CASE: matched {old!r} case-insensitively")
 
-        if name_exists(current, new):
-            patched, patch_log = patch_header_object_name_refs(upk, current, old, new)
-            if patch_log:
-                current = patched
-                log.extend(patch_log)
-                continue
-            log.append(f"SKIP: {new!r} already exists and no header refs were patched")
-            continue
+        # FIX: Instead of only patching header refs (which causes a Header/Body desync crash),
+        # we free up the target name if it already exists in the file's dictionary.
+        colliding_indices, _ = find_name_indices(current, new)
+        for c_idx in colliding_indices:
+            dummy_name = f"FREEDNAME{c_idx}" # No underscores, engine treats as pure base name
+            try:
+                current = upk.rename_name_entry(current, c_idx, dummy_name)
+                log.append(f"FREED: Renamed colliding name at index {c_idx} to {dummy_name}")
+            except Exception as e:
+                log.append(f"WARN: Could not free colliding name: {e}")
 
+        # Now force the physical text replacement so body and header stay perfectly synced
         for idx in indices:
             old_actual = clean_name(current.names[idx].name)
             if preserve_header_offsets:
@@ -323,8 +326,12 @@ def apply_name_pairs(upk, package, pairs: Sequence[Tuple[str, str]], preserve_he
                     current = fixed
                     log.append(f"FIXED: name[{idx}] {old_actual!r} -> {new!r} in-place; preserved header offsets; pad={pad}.")
                     continue
-            current = upk.rename_name_entry(current, idx, new)
-            log.append(f"RENAMED: name[{idx}] {old_actual!r} -> {new!r}; header offsets may change.")
+            try:
+                current = upk.rename_name_entry(current, idx, new)
+                log.append(f"RENAMED: name[{idx}] {old_actual!r} -> {new!r}; header offsets may change.")
+            except Exception as e:
+                log.append(f"ERROR: could not rename {old_actual!r}: {e}")
+                
     return current, log
 
 
