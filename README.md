@@ -98,20 +98,10 @@ For scripting or automation, pass `--no-gui`, `--auto-swap`, or `--revert` to sk
 
 ```bash
 # Swap a target item to look like a donor item
-python rl_asset_swapper.py \
-  --no-gui \
-  --donor-dir  /path/to/CookedPCConsole \
-  --output-dir /path/to/output \
-  --slot Body \
-  --target "Octane" \
-  --donor  "Fennec"
+python rl_asset_swapper.py --no-gui --donor-dir  /path/to/CookedPCConsole --output-dir /path/to/output --slot Body --target "Octane" --donor  "Fennec"
 
 # Revert a target item back to original
-python rl_asset_swapper.py \
-  --revert \
-  --donor-dir  /path/to/CookedPCConsole \
-  --output-dir /path/to/output \
-  --target "Octane"
+python rl_asset_swapper.py --revert  --donor-dir  /path/to/CookedPCConsole --output-dir /path/to/output --target "Octane"
 ```
 
 **All CLI flags**
