@@ -37,7 +37,7 @@ Both files should be placed in the same directory as the scripts. The tools will
 
 > **Swapping certain asset types is not yet fully supported and will cause Rocket League to crash on load.** This is a known limitation of the current version and is being worked on. Until a fix is released, avoid swapping the following:
 
-> Thumbnails in general cause a lot of crashes.
+> Thumbnails in general cause a lot of crashes, as well as bodies and goal explosions.
 
 > If a swap you attempt causes a crash, you should either validate game files, OR, you can select a directory with backup files (i play on steam, so i use my epic folder), that will be used when you hit the revert button.
 
