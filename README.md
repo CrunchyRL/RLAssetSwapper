@@ -172,7 +172,7 @@ All edits are made in memory and must be explicitly saved. Two save options are 
 
 ## Typical Workflow
 
-1. Dump `CookedPCConsole` from Rocket League (or obtain `.upk` files another way).
+1. Locate `CookedPCConsole` from Rocket League (or obtain `.upk` files another way).
 2. Place `items.json` and `keys.txt` next to both scripts.
 3. Run `rl_asset_swapper.py`, point **Donor/input directory** and **Key/revert source dir** at your dumped files, and set an **Output directory**.
 4. Choose a slot, pick your target and donor items, and click **Swap**.
